@@ -14,7 +14,13 @@
             <img class="gif" id="mainGif" src="" alt="romantic gif">
         </div>
         <div id="wa-btn-wrapper" style="display:none; margin-top:2rem;">
-            <a href="https://wa.me/?text=Hey%2C%20let%27s%20fix%20a%20date!" target="_blank" rel="noopener" class="wa-btn">lets fix a date!</a>
+            <a href="#" id="waBtn" class="wa-btn">lets fix a date!</a>
+            // WhatsApp button handler for best mobile compatibility
+            document.getElementById('waBtn').onclick = function(e) {
+                e.preventDefault();
+                window.open('https://wa.me/?text=Hey%2C%20let%27s%20fix%20a%20date!', '_blank', 'noopener');
+                return false;
+            };
         </div>
     </div>
     <script>
@@ -27,9 +33,8 @@
     let currentGif = 0;
     const mainGif = document.getElementById('mainGif');
     const waBtnWrapper = document.getElementById('wa-btn-wrapper');
-    let sequencePlayed = false;
+
     function playGifSequence() {
-        if (sequencePlayed) return;
         mainGif.src = gifLinks[currentGif];
         mainGif.onload = () => {
             setTimeout(() => {
@@ -38,13 +43,21 @@
                     playGifSequence();
                 } else {
                     waBtnWrapper.style.display = 'block';
-                    sequencePlayed = true;
+                    // Persist state so button stays visible after returning from WhatsApp
+                    localStorage.setItem('showWaBtn', '1');
                 }
             }, 4000);
         };
     }
+
     window.onload = () => {
-        if (!sequencePlayed) playGifSequence();
+        if (localStorage.getItem('showWaBtn') === '1') {
+            waBtnWrapper.style.display = 'block';
+            // Optionally, show the last GIF
+            mainGif.src = gifLinks[gifLinks.length - 1];
+        } else {
+            playGifSequence();
+        }
     };
     </script>
 </body>
