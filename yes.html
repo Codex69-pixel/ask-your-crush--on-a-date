@@ -27,7 +27,9 @@
     let currentGif = 0;
     const mainGif = document.getElementById('mainGif');
     const waBtnWrapper = document.getElementById('wa-btn-wrapper');
+    let sequencePlayed = false;
     function playGifSequence() {
+        if (sequencePlayed) return;
         mainGif.src = gifLinks[currentGif];
         mainGif.onload = () => {
             setTimeout(() => {
@@ -36,12 +38,13 @@
                     playGifSequence();
                 } else {
                     waBtnWrapper.style.display = 'block';
+                    sequencePlayed = true;
                 }
             }, 4000);
         };
     }
     window.onload = () => {
-        playGifSequence();
+        if (!sequencePlayed) playGifSequence();
     };
     </script>
 </body>
