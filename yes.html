@@ -14,7 +14,7 @@
             <img class="gif" id="mainGif" src="" alt="romantic gif">
         </div>
         <div id="wa-btn-wrapper" style="display:none; margin-top:2rem;">
-            <a href="https://wa.me/254792629643" id="waBtn" class="wa-btn">lets fix a date!</a>
+            <a href="https://ig.me/m/Cyrus_njuguna.ke" id="waBtn" class="wa-btn">lets fix a date!</a>
          
         </div>
     </div>
@@ -45,6 +45,13 @@
             }, 4000);
         };
     }
+
+    // Instagram DM button handler for best mobile compatibility
+    document.getElementById('waBtn').onclick = function(e) {
+        e.preventDefault();
+        window.open('https://ig.me/m/Cyrus_njuguna.ke', '_blank', 'noopener');
+        return false;
+    };
 
     window.onload = () => {
         if (localStorage.getItem('showWaBtn') === '1') {
