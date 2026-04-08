@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yay!</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="gradient-bg"></div>
+    <div class="container">
+        <h1 style="text-align:center;">LET'S GOOOO 🎉🔥</h1>
+        <div id="gif-sequence">
+            <img class="gif" id="mainGif" src="" alt="romantic gif">
+        </div>
+        <div id="wa-btn-wrapper" style="display:none; margin-top:2rem;">
+            <a href="https://wa.link/3n1xoz" target="_blank" rel="noopener" class="wa-btn">lets fix a date!</a>
+        </div>
+    </div>
+    <script>
+    const gifLinks = [
+        // 1. romance
+        "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3AyaXZ3cXVnNWRna3czcHVxZWxqeHYxOXVjZDdlYm1kM2t6OHJtcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JnRmBCxub2L1oCNUcO/giphy.gif",
+        // 2. flowers
+        "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExenNxamI2eHh0ZXpocmQ2aTc5NmVxNWtjbDM5dzFqeXFqNmN5ejRjaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/DaImtA2yYFu7YiX23u/giphy.gif"
+    ];
+    let currentGif = 0;
+    const mainGif = document.getElementById('mainGif');
+    const waBtnWrapper = document.getElementById('wa-btn-wrapper');
+    function playGifSequence() {
+        mainGif.src = gifLinks[currentGif];
+        mainGif.onload = () => {
+            setTimeout(() => {
+                currentGif++;
+                if (currentGif < gifLinks.length) {
+                    playGifSequence();
+                } else {
+                    waBtnWrapper.style.display = 'block';
+                }
+            }, 4000);
+        };
+    }
+    window.onload = () => {
+        playGifSequence();
+    };
+    </script>
+</body>
+</html>

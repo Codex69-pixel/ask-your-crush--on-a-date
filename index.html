@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Out</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<body>
+    <div class="gradient-bg"></div>
+
+<div class="container">
+    <div id="gif-sequence">
+        <img class="gif" id="mainGif" src="" alt="cute gif">
+    </div>
+    <div class="button-group" id="buttonGroup" style="display:none;">
+        <button id="yesButton" onclick="nextPage()">Yes</button>
+        <button id="noButton" onmouseover="moveButton()">No</button>
+    </div>
+</div>
+
+<div class="gradient-bg"></div>
+
+<script>
+function nextPage() {
+    window.location.href = "yes.html";
+}
+
+function moveButton() {
+    const button = document.getElementById("noButton");
+    const x = Math.random() * (window.innerWidth - button.offsetWidth);
+    const y = Math.random() * (window.innerHeight - button.offsetHeight);
+    button.style.position = "absolute";
+    button.style.left = `${x}px`;
+    button.style.top = `${y}px`;
+}
+
+
+// GIF sequence logic
+const gifLinks = [
+    // 1. hello beautiful
+    "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmNoanM1YW5iandvc2R4b2dqM2kyaDJ5cHBoOXYyaW9wajV4dHNqbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/53N1ssNvPx4rk6YYfD/giphy.gif",
+    // 2. how you doing
+    "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXdvMjAyN3VmZDh4cDczdmZiMWxjeXR0cWh0M283bHR3MDZ0Mmo3ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mBMV5qmbFR4tIFjXRH/giphy.gif",
+    // 3. will you go out with me
+    "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3RiaWx5Ynl4cWZtMW9wNXc4cTN2d2gyYXRsN2pqejltcGdxcjIzMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AEWVSewz8sSm3HFoib/giphy.gif",
+    // 4. visual ask (non-verbal)
+    "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDZkMG1meTh6NXJ1NDQ1NHZ3aTEzN2xlaXA2eGpmazJ0cm9uZGpyMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P5CaMAKnBwZgBEOlij/giphy.gif"
+];
+let currentGif = 0;
+const mainGif = document.getElementById('mainGif');
+const buttonGroup = document.getElementById('buttonGroup');
+
+function playGifSequence() {
+    mainGif.src = gifLinks[currentGif];
+    mainGif.onload = () => {
+        // Show each GIF for 4s, then move to next
+        setTimeout(() => {
+            currentGif++;
+            if (currentGif < gifLinks.length) {
+                playGifSequence();
+            } else {
+                // Show buttons after last GIF
+                buttonGroup.style.display = 'flex';
+            }
+        }, 4000);
+    };
+}
+
+// Start sequence on page load
+window.onload = () => {
+    playGifSequence();
+};
+</script>
+
+</body>
+</html>
