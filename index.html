@@ -1,78 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ask Out</title>
-    <link rel="stylesheet" href="./style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Grace 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Plus+Jakarta+Sans:wght@500;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<body>
-    <div class="gradient-bg"></div>
+<div id="hearts" aria-hidden="true"></div>
 
-<div class="container">
-    <div id="gif-sequence">
-        <img class="gif" id="mainGif" src="" alt="cute gif">
-    </div>
-    <div class="button-group" id="buttonGroup" style="display:none;">
-        <button id="yesButton" onclick="nextPage()">Yes</button>
-        <button id="noButton" onmouseover="moveButton()">No</button>
-    </div>
-</div>
+<!-- 1. THE ASK -->
+<section class="scene active" id="ask">
+  <div class="mascot" id="m1" data-mood="normal"></div>
+  <div class="sign">
+    <h1 id="question">Grace, will you be my girlfriend?</h1>
+    <p id="hint">I made this just for you 💌</p>
+  </div>
+  <div class="buttons">
+    <button id="yes" class="btn yes">Yes 💖</button>
+    <button id="no" class="btn no">No</button>
+  </div>
+</section>
 
-<div class="gradient-bg"></div>
+<!-- 2. HOORAY + HUB -->
+<section class="scene" id="hub">
+  <div class="mascot sm" data-mood="happy"></div>
+  <h2 class="script big">Hooray! You said yes! 🎉</h2>
+  <p class="sub">Grace, you just made me the happiest person. Open these 💕</p>
+  <div class="tiles">
+    <button class="tile" data-go="note"><span>💌</span>Love note</button>
+    <button class="tile" data-go="us"><span>📸</span>Us</button>
+    <button class="tile" data-go="flowers"><span>💐</span>Flowers</button>
+    <button class="tile" data-go="date"><span>🍷</span>Our date</button>
+  </div>
+</section>
 
-<script>
-function nextPage() {
-    window.location.href = "yes.html";
-}
+<!-- 3. LOVE NOTE -->
+<section class="scene" id="note">
+  <h2 class="script">Words from my heart</h2>
+  <div class="mascot sm corner" data-mood="normal"></div>
+  <div class="paper"><div class="tape"></div><p id="letter"></p><div class="sig" id="sig"></div></div>
+  <button class="btn back" data-go="hub">← back</button>
+</section>
 
-function moveButton() {
-    const button = document.getElementById("noButton");
-    const x = Math.random() * (window.innerWidth - button.offsetWidth);
-    const y = Math.random() * (window.innerHeight - button.offsetHeight);
-    button.style.position = "absolute";
-    button.style.left = `${x}px`;
-    button.style.top = `${y}px`;
-}
+<!-- 4. US -->
+<section class="scene" id="us">
+  <h2 class="script">Forever together</h2>
+  <div class="polaroid">
+    <!-- 👉 Put your AI image of you two at photos/us.jpg -->
+    <img src="photos/us.jpg" alt="Cyrus and Grace" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',innerHTML:'📷<br>Our picture goes here'}))">
+    <div class="cap">Cyrus &amp; Grace 💗</div>
+  </div>
+  <div class="note-card" id="usnote"></div>
+  <button class="btn back" data-go="hub">← back</button>
+</section>
 
+<!-- 5. FLOWERS -->
+<section class="scene" id="flowers">
+  <h2 class="script">Flowers for my love</h2>
+  <div class="bouquet" id="bouquet"></div>
+  <div id="stickies"></div>
+  <button class="btn back" data-go="hub">← back</button>
+</section>
 
-// GIF sequence logic
-const gifLinks = [
-    // 1. hello beautiful
-    "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmNoanM1YW5iandvc2R4b2dqM2kyaDJ5cHBoOXYyaW9wajV4dHNqbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/53N1ssNvPx4rk6YYfD/giphy.gif",
-    // 2. how you doing
-    "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXdvMjAyN3VmZDh4cDczdmZiMWxjeXR0cWh0M283bHR3MDZ0Mmo3ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mBMV5qmbFR4tIFjXRH/giphy.gif",
-    // 3. will you go out with me
-    "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3RiaWx5Ynl4cWZtMW9wNXc4cTN2d2gyYXRsN2pqejltcGdxcjIzMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AEWVSewz8sSm3HFoib/giphy.gif",
-    // 4. visual ask (non-verbal)
-    "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDZkMG1meTh6NXJ1NDQ1NHZ3aTEzN2xlaXA2eGpmazJ0cm9uZGpyMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/P5CaMAKnBwZgBEOlij/giphy.gif"
-];
-let currentGif = 0;
-const mainGif = document.getElementById('mainGif');
-const buttonGroup = document.getElementById('buttonGroup');
+<!-- 6. DATE -->
+<section class="scene" id="date">
+  <h2 class="script">Our first date as a couple 🥂</h2>
+  <p class="sub">Pick as many as you like, Grace 💕</p>
+  <div class="chips" id="chips"></div>
+  <input type="date" id="when" aria-label="Pick a date">
+  <button class="btn yes" id="send">Lock it in 💌</button>
+  <p class="sub" id="done"></p>
+  <button class="btn back" data-go="hub">← back</button>
+</section>
 
-function playGifSequence() {
-    mainGif.src = gifLinks[currentGif];
-    mainGif.onload = () => {
-        // Show each GIF for 4s, then move to next
-        setTimeout(() => {
-            currentGif++;
-            if (currentGif < gifLinks.length) {
-                playGifSequence();
-            } else {
-                // Show buttons after last GIF
-                buttonGroup.style.display = 'flex';
-            }
-        }, 4000);
-    };
-}
-
-// Start sequence on page load
-window.onload = () => {
-    playGifSequence();
-};
-</script>
-
+<div id="ground" aria-hidden="true"></div>
+<script src="./script.js"></script>
 </body>
 </html>
